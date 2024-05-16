@@ -14,7 +14,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ToggleColorMode from "../../component/ToggleColorMode";
 import { Link } from "react-router-dom";
 import NavbarDaw from "../rootPage/Dawer";
-import { Grid, IconButton } from "@mui/material";
+import {
+  Autocomplete,
+  Grid,
+  IconButton,
+  Stack,
+  TextField,
+} from "@mui/material";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import ProfileMenu from "./ProfileMenu";
 import useAuth from "../../hooks/useAuth";
@@ -176,6 +182,23 @@ function Navbar({ mode, toggleColorMode }) {
               }}
             >
               <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+
+              <Box>
+                <Stack width={150}>
+                  <Autocomplete
+                    onChange={(event, data) => {
+                      console.log(data);
+                    }}
+                    value={branches?.find((item) => item._id === user?.branch)}
+                    options={branches || []}
+                    getOptionLabel={(option) => option?.name}
+                    disableClearable
+                    renderInput={(params) => (
+                      <TextField {...params} variant="outlined" />
+                    )}
+                  />
+                </Stack>
+              </Box>
 
               {!isLoggedIn && !user && (
                 <MenuItem>
