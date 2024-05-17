@@ -5,8 +5,8 @@ export const successAndErrorHandler = () => (next) => (action) => {
   const requestMethod = action.meta?.baseQueryMeta?.request?.method;
   if (isRejectedWithValue(action) && requestMethod !== "GET") {
     let errorMessage = action.payload?.data;
-    if (typeof action.payload?.data?.error === "string") {
-      errorMessage = action.payload?.data?.error;
+    if (typeof action.payload?.data?.message === "string") {
+      errorMessage = action.payload?.data?.message;
     } else if (typeof errorMessage === "object") {
       errorMessage = errorMessage.message;
     }
